@@ -1,0 +1,75 @@
+[debug] Packaging D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\aws-certification-tool_2.13-19.0.0-R30.jar ...
+[debug] Input file mappings:
+[debug] 	AppStart
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\AppStart
+[debug] 	AppStart\Application$$anon$1.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\AppStart\Application$$anon$1.class
+[debug] 	AppStart\Application$$anon$2.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\AppStart\Application$$anon$2.class
+[debug] 	AppStart\Application$.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\AppStart\Application$.class
+[debug] 	AppStart\Application.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\AppStart\Application.class
+[debug] 	Builder
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Builder
+[debug] 	Builder\QABuilder$.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Builder\QABuilder$.class
+[debug] 	Builder\QABuilder.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Builder\QABuilder.class
+[debug] 	Handlers
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers
+[debug] 	Handlers\FileHandler$.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\FileHandler$.class
+[debug] 	Handlers\FileHandler.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\FileHandler.class
+[debug] 	Handlers\FileInputExtractHandler$.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\FileInputExtractHandler$.class
+[debug] 	Handlers\FileInputExtractHandler.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\FileInputExtractHandler.class
+[debug] 	Handlers\SceneHandler$$anon$1$$anon$2.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\SceneHandler$$anon$1$$anon$2.class
+[debug] 	Handlers\SceneHandler$$anon$1.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\SceneHandler$$anon$1.class
+[debug] 	Handlers\SceneHandler$$anon$10.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\SceneHandler$$anon$10.class
+[debug] 	Handlers\SceneHandler$$anon$11.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\SceneHandler$$anon$11.class
+[debug] 	Handlers\SceneHandler$$anon$3.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\SceneHandler$$anon$3.class
+[debug] 	Handlers\SceneHandler$$anon$4.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\SceneHandler$$anon$4.class
+[debug] 	Handlers\SceneHandler$$anon$5.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\SceneHandler$$anon$5.class
+[debug] 	Handlers\SceneHandler$$anon$6.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\SceneHandler$$anon$6.class
+[debug] 	Handlers\SceneHandler$$anon$7.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\SceneHandler$$anon$7.class
+[debug] 	Handlers\SceneHandler$$anon$8.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\SceneHandler$$anon$8.class
+[debug] 	Handlers\SceneHandler$$anon$9.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\SceneHandler$$anon$9.class
+[debug] 	Handlers\SceneHandler$.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\SceneHandler$.class
+[debug] 	Handlers\SceneHandler.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Handlers\SceneHandler.class
+[debug] 	Models
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Models
+[debug] 	Models\Answer$.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Models\Answer$.class
+[debug] 	Models\Answer.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Models\Answer.class
+[debug] 	Models\Options$.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Models\Options$.class
+[debug] 	Models\Options.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Models\Options.class
+[debug] 	Models\Question$.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Models\Question$.class
+[debug] 	Models\Question.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Models\Question.class
+[debug] 	Utilities
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Utilities
+[debug] 	Utilities\FileParserUtility$.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Utilities\FileParserUtility$.class
+[debug] 	Utilities\FileParserUtility.class
+[debug] 	  D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes\Utilities\FileParserUtility.class
+[debug] Done packaging.

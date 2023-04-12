@@ -1,0 +1,17 @@
+[debug] Created transactional ClassFileManager with tempDir = D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes.bak
+[debug] About to delete class files:
+[debug] 	Application$$anon$2.class
+[debug] 	Application$.class
+[debug] 	Application$$anon$1.class
+[debug] 	Application.class
+[debug] We backup class files:
+[debug] 	Application$$anon$2.class
+[debug] 	Application$.class
+[debug] 	Application$$anon$1.class
+[debug] 	Application.class
+[debug] Registering generated classes:
+[debug] 	Application$$anon$2.class
+[debug] 	Application$$anon$1.class
+[debug] 	Application.class
+[debug] 	Application$.class
+[debug] Removing the temporary directory used for backing up class files: D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\target\scala-2.13\classes.bak

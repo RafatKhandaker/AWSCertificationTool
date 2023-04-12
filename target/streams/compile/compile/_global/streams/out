@@ -1,0 +1,6 @@
+[debug] Acquiring lock on file D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\project\target\.sbt-compilation-infos\awscertificationtool-compile\.sbt-idea-lock ...
+[warn] D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\src\main\scala\AppStart\Application.scala:24:52: method any2stringadd in object Predef is deprecated (since 2.13.0): Implicit injection of + is deprecated. Convert to String to call +
+[warn]       FileSystems.getDefault.getPath(Paths.get("").toAbsolutePath+"/project/input")
+[warn]                                                    ^
+[warn] one warning found
+[debug] Releasing lock on file D:\Users\Red Twizzler\IntelliJ_Work_Space\HydrablendTechnology.ScalaTools\AWSCertificationTool\project\target\.sbt-compilation-infos\awscertificationtool-compile\.sbt-idea-lock.
