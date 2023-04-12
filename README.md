@@ -42,11 +42,11 @@ Currently, Eclipse is not well supported for general scala projects. I am not su
 In the future I will update a link to the executable Jar file. So users may simply install Java 11 and run the jar executable file.
 
 
-Explanation of the challenges of development and how to use this tool effectively
+# Development Challenge
+
+"Watch This Video if you want to learn how this program works internally and the challenges of developing this product. Gives insight on how to work on this tool for updates"
 
 https://youtu.be/cp0x8BOdW2o   
-
-
 
 
 UX User Interface Design (Simple and Easy):
@@ -58,3 +58,4 @@ Initial Scene:
 Transitions:
 
 ![AWSQuestionTool](https://user-images.githubusercontent.com/19369242/231552064-6efd54d2-6e1d-4844-ba04-5ca21337fa97.PNG)
+
