@@ -1,3 +1,3 @@
 package Models
 
-case class Answer( choice: Char, text: String )
+case class Answer( choice: String, text: String )
