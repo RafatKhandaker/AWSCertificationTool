@@ -144,7 +144,7 @@ object SceneHandler {
       })
 
     submit.setOnAction((e)=>{
-      if( listQuestions(qIndex).text.toLowerCase().contains("select two.")){
+      if(listQuestions(qIndex).text.toLowerCase().contains("select two.") || listAnswers(qIndex).choice.length.equals(2)){
         val filteredCBL = checkBoxList.filter(cbx => cbx.isSelected)
         if(filteredCBL.length != 2){
           answerLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: red")
@@ -162,7 +162,7 @@ object SceneHandler {
 
         var checkAns = true
         0 to filteredCBL.length foreach{ i => {
-          if( !selectedAnswers(qIndex).choice.equals( listAnswers(qIndex).choice ) ) {
+          if(!selectedAnswers(qIndex).choice.equals( listAnswers(qIndex).choice )) {
             answerLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: red")
             answerLabel.setText(s"Incorrect! Answer ${listAnswers(qIndex).choice(0)+","+listAnswers(qIndex).choice(1)}: ${listAnswers(qIndex).text}")
             checkAns = false
@@ -174,7 +174,7 @@ object SceneHandler {
         }
       }
 
-      else if( !listQuestions(qIndex).text.toLowerCase().contains("select two.")){
+      else if(!listQuestions(qIndex).text.toLowerCase().contains("select two.") && !listAnswers(qIndex).choice.length.equals(2)){
         val c = toggleRadBtn.getSelectedToggle.asInstanceOf[javafx.scene.control.RadioButton].getText
         selectedAnswers.addOne( Answer(c(0).toString, c) )
 
@@ -195,7 +195,7 @@ object SceneHandler {
     next.setOnAction((e)=>{
       qIndex += 1
       label.setText(listQuestions(qIndex).text)
-      if( listQuestions(qIndex).text.toLowerCase().contains("select two.") ){
+      if(listQuestions(qIndex).text.toLowerCase().contains("select two.") || listAnswers(qIndex).choice.length.equals(2) ){
         0 to 3 foreach{ i => {
           checkBoxList(i).setText(listQuestions(qIndex).options(i).text)
           checkBoxList(i).setSelected(false)
@@ -211,7 +211,7 @@ object SceneHandler {
 
       answerLabel.setVisible(false)
       next.setVisible(false)
-      if(listQuestions(qIndex).text.toLowerCase().contains("select two.")){
+      if(listQuestions(qIndex).text.toLowerCase().contains("select two.") || listAnswers(qIndex).choice.length.equals(2)){
         vBox1.children = Seq(
           label,
           checkBoxList(0),
