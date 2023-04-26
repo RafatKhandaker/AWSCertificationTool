@@ -7,7 +7,7 @@ import scala.collection.mutable.ListBuffer
 
 object QABuilder {
   var p1 = "\\d+\\. ([A-Za-z&-._\\n*“”,’—]+( [A-Za-z&-._\\n“”,’(0-9)—]*)+)\\?* (\\n*\\S* *\\n*\\S*)\\n".r
-  var p2 = "[A-D]{1}\\. ([A-Za-z&-._\\n*“”,’—]+( [A-Za-z&-._“”,’\\n(0-9)—;]*)+)\\n{1}".r
+  var p2 = "[A-D]{1}\\. ([A-Za-z&-._\\/\\n*“”,’—]+( [A-Za-z&-._“”,’\\/\\n(0-9)—;]*)+)\\n{1}".r
 
   var listQuestions: ListBuffer[Question] = new ListBuffer()
   var listOptions: ListBuffer[Options] = new ListBuffer()
