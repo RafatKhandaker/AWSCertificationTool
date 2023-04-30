@@ -2,6 +2,7 @@ package Builder
 
 import Handlers.FileHandler
 import Models.{Answer, Options, Question}
+import scalafx.collections.ObservableBuffer
 
 import scala.collection.mutable.ListBuffer
 
@@ -12,6 +13,8 @@ object QABuilder {
   var listQuestions: ListBuffer[Question] = new ListBuffer()
   var listOptions: ListBuffer[Options] = new ListBuffer()
   var listAnswers: ListBuffer[Answer] = new ListBuffer()
+  var listSectionQuestion: ListBuffer[Question] = new ListBuffer()
+  var listSectionIndex: ObservableBuffer[String] = new ObservableBuffer()
 
   var qIndex: Int = 0
   var aIndex: Int = 0
@@ -53,5 +56,12 @@ object QABuilder {
     this
   }
 
+  def buildSelectionList(): QABuilder.type ={
+    listSectionQuestion = listQuestions.filter(q=> q.text.take(2).equals("1."))
+    0 to listSectionQuestion.length foreach((i)=>{
+      listSectionIndex.addOne(s"Section ${i}")
+    })
+    this
+  }
 }
 

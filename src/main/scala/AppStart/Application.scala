@@ -1,6 +1,6 @@
 package AppStart
 
-import Builder.{QABuilder, ViewBuilder}
+import Builder.ViewBuilder
 import Handlers.SceneHandler
 import Models.Properties
 import scalafx.Includes._
@@ -33,10 +33,9 @@ object Application extends JFXApp3{
     stage.scene = SceneHandler.createInitialScene(cbx).currentScene
 
     cbx.setOnAction((e:ActionEvent)=>{
-      val dir = directoryList.find( x => x.toString.contains(cbx.getSelectionModel.getSelectedItem) ).get.toString
-      stage.scene = SceneHandler.addQuestionsList(QABuilder.buildQuestionaire(dir).listQuestions.toList)
-                                    .addAnswersList(QABuilder.buildAnswerList(dir).listAnswers.toList)
-                                        .Next().currentScene;
+      stage.scene = SceneHandler.build(
+        directoryList.find( x => x.toString.contains(cbx.getSelectionModel.getSelectedItem) ).get.toString
+      ).Next().currentScene
     })
 
   }

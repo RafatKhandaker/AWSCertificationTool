@@ -1,9 +1,11 @@
 package Builder
 
+import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.Node
-import scalafx.scene.control.{Button, CheckBox, ChoiceBox, Label, RadioButton, ToggleGroup}
+import scalafx.scene.chart.{BarChart, CategoryAxis, NumberAxis, XYChart}
+import scalafx.scene.control._
 import scalafx.scene.layout.VBox
 
 import scala.Double.NaN
@@ -75,6 +77,33 @@ object ViewBuilder {
       alignmentInParent = pos
       items = itemOptions
       selectionModel().selectFirst()
+    }
+  }
+
+  def createBarChartResult(bGap: Double, cGap: Double, style: String, titleTxt: String, score: Double): BarChart[Number, String]={
+    val label = "Score"
+
+    val yAxis = new CategoryAxis {
+      label = s"${score} %"
+    }
+
+    val xAxis = new NumberAxis {
+      label = "Total"
+      tickLabelFormatter = NumberAxis.DefaultFormatter(this, "%", "")
+    }
+
+    val series = new XYChart.Series[Number, String] {
+      name = "User Score Result"
+      data() += XYChart.Data[Number, String](score, label)
+    }
+
+    def xyData(xs: Seq[Number]) = ObservableBuffer(xs zip label map (xy => XYChart.Data(xy._1, xy._2)))
+
+    new BarChart(xAxis, yAxis) {
+      barGap = bGap
+      categoryGap = cGap
+      title = titleTxt
+      data() ++= Seq(series)
     }
   }
 }

@@ -8,6 +8,7 @@ object Properties {
 
   val footer: String = "Created By: Rafat Khandaker\nEmail: rafat.Khandaker.developer@gmail.com"
   val boldStyle: String = "-fx-font-weight: bold"
+  val barStyle: String = ".default-color0.chart-bar{ -fx-bar-fill: Green }"
 
   val submitTxt: String = "Submit"
   val nextTxt: String = "Next"
@@ -19,5 +20,5 @@ object Properties {
 
   val selectOnlyTwoTxt: String = "!!! Select only 2 values !!!"
 
-
+  val barGraphTitle: String = "Total Score Percentage"
 }

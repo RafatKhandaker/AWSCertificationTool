@@ -1,22 +1,32 @@
 package Events
 
-import Handlers.SceneHandler.{currentScene, listAnswers, listQuestions, qIndex, selectedAnswers}
+import Builder.QABuilder.{listAnswers, listQuestions, listSectionQuestion}
+import Handlers.SceneHandler.{correctCount, currentScene, qIndex, selectedAnswers}
 import Models.{Answer, Properties}
-import scalafx.scene.control.{Button, CheckBox, Label, RadioButton, ToggleGroup}
+import scalafx.scene.chart.BarChart
+import scalafx.scene.control._
 import scalafx.scene.layout.VBox
 
 import scala.collection.mutable.ListBuffer
 
 object ActionEventListener {
 
-  def clickSubmit(answerLabel: Label, next: Button, checkBoxList: ListBuffer[CheckBox], toggleRadBtn: ToggleGroup): Unit ={
+  def getSectionChoiceIndex(choiceBox: ChoiceBox[String] ): Int = {
+    listSectionQuestion(choiceBox.getSelectionModel.getSelectedIndex).number -1
+  }
+
+  def showResult(vBox1: VBox, sectionCbx: ChoiceBox[String], next: Button, bChart: BarChart[Number, String]): Unit ={
+    vBox1.children = Seq(sectionCbx,bChart, next)
+  }
+
+  def submit(answerLabel: Label, next: Button, checkBoxList: ListBuffer[CheckBox], toggleRadBtn: ToggleGroup): Unit ={
     if(listQuestions(qIndex).text.toLowerCase().contains(Properties.selectTwo) || listAnswers(qIndex).choice.length.equals(2)){
       val filteredCBL = checkBoxList.filter(cbx => cbx.isSelected)
       if(filteredCBL.length != 2){
         answerLabel.setStyle(Properties.incorrectStyle)
         answerLabel.setText(Properties.selectOnlyTwoTxt)
         answerLabel.setVisible(true)
-        return this
+        return
       }
       var c = ""
       var cText = ""
@@ -37,6 +47,7 @@ object ActionEventListener {
       if(checkAns){
         answerLabel.setStyle(Properties.correctStyle)
         answerLabel.setText(s"Correct! Answer ${listAnswers(qIndex).choice(0)+","+listAnswers(qIndex).choice(1)}: ${listAnswers(qIndex).text}")
+        correctCount += 1
       }
     }
 
@@ -47,7 +58,7 @@ object ActionEventListener {
       if(selectedAnswers(qIndex).choice.equals(listAnswers(qIndex).choice)){
         answerLabel.setStyle(Properties.correctStyle)
         answerLabel.setText(s"Correct! Answer ${listAnswers(qIndex).choice}: ${listAnswers(qIndex).text}" )
-
+        correctCount += 1
       }else{
         answerLabel.setStyle(Properties.incorrectStyle)
         answerLabel.setText(s"Inorrect! Answer ${listAnswers(qIndex).choice}: ${listAnswers(qIndex).text}" )
@@ -58,7 +69,7 @@ object ActionEventListener {
     next.setVisible(true)
   }
 
-  def clickNext( qIndex: Int, label: Label, answerLabel: Label, next: Button, submit: Button, vBox1: VBox, footerVBox: VBox, checkBoxList:ListBuffer[CheckBox], radioBtnList: ListBuffer[RadioButton] ): Unit={
+  def next(qIndex: Int, sectionCbx: ChoiceBox[String], label: Label, answerLabel: Label, next: Button, submit: Button, vBox1: VBox, footerVBox: VBox, checkBoxList:ListBuffer[CheckBox], radioBtnList: ListBuffer[RadioButton] ): Unit={
     label.setText(listQuestions(qIndex).text)
     if(listQuestions(qIndex).text.toLowerCase().contains(Properties.selectTwo) || listAnswers(qIndex).choice.length.equals(2) ){
       0 to 3 foreach{ i => {
@@ -78,6 +89,7 @@ object ActionEventListener {
     next.setVisible(false)
     if(listQuestions(qIndex).text.toLowerCase().contains(Properties.selectTwo) || listAnswers(qIndex).choice.length.equals(2)){
       vBox1.children = Seq(
+        sectionCbx,
         label,
         checkBoxList(0),
         checkBoxList(1),
@@ -90,6 +102,7 @@ object ActionEventListener {
       )
     }else{
       vBox1.children = Seq(
+        sectionCbx,
         label,
         radioBtnList(0),
         radioBtnList(1),
