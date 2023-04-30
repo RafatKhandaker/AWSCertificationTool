@@ -20,7 +20,7 @@ object Application extends JFXApp3{
     courseItems.addOne("Select Course")
 
     val directoryList = Files.list(
-      FileSystems.getDefault.getPath(Paths.get("").toAbsolutePath+"/project/input")
+      FileSystems.getDefault.getPath(Paths.get("").toAbsolutePath+"/input")
     ).toArray
 
     directoryList.foreach(x => courseItems.addOne(x.toString.substring(x.toString.lastIndexOf("\\")+1)) )

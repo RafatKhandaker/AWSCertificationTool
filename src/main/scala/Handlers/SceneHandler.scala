@@ -83,8 +83,6 @@ object SceneHandler {
         footerVBox
       ))
 
-
-
     submit.setOnAction((e)=>{
       ActionEventListener.clickSubmit(
         answerLabel,next,checkBoxList,toggleRadBtn
