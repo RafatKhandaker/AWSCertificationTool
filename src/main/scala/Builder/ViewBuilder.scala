@@ -81,10 +81,10 @@ object ViewBuilder {
   }
 
   def createBarChartResult(bGap: Double, cGap: Double, style: String, titleTxt: String, score: Double): BarChart[Number, String]={
-    val label = "Score"
+    val label = s"${score} %"
 
     val yAxis = new CategoryAxis {
-      label = s"${score} %"
+      label = "Score"
     }
 
     val xAxis = new NumberAxis {
@@ -93,8 +93,13 @@ object ViewBuilder {
     }
 
     val series = new XYChart.Series[Number, String] {
-      name = "User Score Result"
+      name = s"User Score Result ${score}"
       data() += XYChart.Data[Number, String](score, label)
+    }
+
+    val series2 = new XYChart.Series[Number, String] {
+      name = s"Max Score ${100}"
+      data() += XYChart.Data[Number, String](100, label)
     }
 
     def xyData(xs: Seq[Number]) = ObservableBuffer(xs zip label map (xy => XYChart.Data(xy._1, xy._2)))
@@ -102,8 +107,8 @@ object ViewBuilder {
     new BarChart(xAxis, yAxis) {
       barGap = bGap
       categoryGap = cGap
-      title = titleTxt
-      data() ++= Seq(series)
+      title = titleTxt+s" - ${score}%"
+      data() ++= Seq(series, series2)
     }
   }
 }

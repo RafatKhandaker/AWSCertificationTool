@@ -16,6 +16,7 @@ object SceneHandler {
 
   var currentScene = new Scene(400,150)
   var qIndex: Int = 0
+  var cIndex: Int = 0
   var correctCount: Int = 0
 
   var showGraph: Boolean = false
@@ -90,6 +91,7 @@ object SceneHandler {
 
     sectionCbx.setOnAction((e)=>{
       qIndex = ActionEventListener.getSectionChoiceIndex(sectionCbx)
+      cIndex = qIndex
       ActionEventListener.next(
         qIndex, sectionCbx, label, answerLabel, next, submit, vBox1, footerVBox, checkBoxList, radioBtnList
       )
@@ -102,8 +104,10 @@ object SceneHandler {
 
     next.setOnAction((e)=>{
       if( showGraph && QABuilder.listQuestions(qIndex+1).text.take(2).equals("1.") ){
-        val bChart = ViewBuilder.createBarChartResult(5,12, Properties.barStyle, Properties.barGraphTitle, (correctCount.toDouble/qIndex)*100 )
+        val bChart = ViewBuilder.createBarChartResult(5,12, Properties.barStyle, Properties.barGraphTitle, (correctCount.toDouble/(qIndex - cIndex +1)*100 ))
           ActionEventListener.showResult(vBox1, sectionCbx, next, bChart)
+        correctCount = 0
+        cIndex = qIndex
         showGraph = false
       }
       else{
