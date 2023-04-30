@@ -2,6 +2,10 @@ package Models
 
 object Properties {
 
+  val programTitle = "AWS Certification Tool"
+  val defaultCourse = "Select Course"
+  val defaultPath = "/input"
+
   val footer: String = "Created By: Rafat Khandaker\nEmail: rafat.Khandaker.developer@gmail.com"
   val boldStyle: String = "-fx-font-weight: bold"
 

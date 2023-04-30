@@ -1,8 +1,9 @@
 package Builder
 
+import scalafx.collections.ObservableBuffer
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.Node
-import scalafx.scene.control.{Button, CheckBox, Label, RadioButton, ToggleGroup}
+import scalafx.scene.control.{Button, CheckBox, ChoiceBox, Label, RadioButton, ToggleGroup}
 import scalafx.scene.layout.VBox
 
 import scala.Double.NaN
@@ -65,5 +66,15 @@ object ViewBuilder {
       selected = select
     }
     radioButtonResult
+  }
+
+  def createChoiceBox[T](mWidth: Double, mHeight: Double, pos: Pos, itemOptions: ObservableBuffer[T] ): ChoiceBox[T]={
+    new ChoiceBox[T]{
+      maxWidth = mWidth
+      maxHeight = mHeight
+      alignmentInParent = pos
+      items = itemOptions
+      selectionModel().selectFirst()
+    }
   }
 }

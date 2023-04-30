@@ -1,7 +1,8 @@
 package AppStart
 
-import Builder.QABuilder
+import Builder.{QABuilder, ViewBuilder}
 import Handlers.SceneHandler
+import Models.Properties
 import scalafx.Includes._
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
@@ -17,28 +18,22 @@ object Application extends JFXApp3{
 
   override def start(): Unit = {
     val courseItems : ObservableBuffer[String] = ObservableBuffer()
-    courseItems.addOne("Select Course")
+    courseItems.addOne(Properties.defaultCourse)
 
     val directoryList = Files.list(
-      FileSystems.getDefault.getPath(Paths.get("").toAbsolutePath+"/input")
+      FileSystems.getDefault.getPath(Paths.get("").toAbsolutePath+Properties.defaultPath)
     ).toArray
 
     directoryList.foreach(x => courseItems.addOne(x.toString.substring(x.toString.lastIndexOf("\\")+1)) )
 
-    stage =  new PrimaryStage {title = "AWS Certification Tool"}
+    stage =  new PrimaryStage {title = Properties.programTitle}
 
-    val cbx = new ChoiceBox[String] {
-      maxWidth = 200
-      maxHeight = 50
-      alignmentInParent = Pos.Center
-      items = courseItems
-      selectionModel().selectFirst()
-    }
+    val cbx = ViewBuilder.createChoiceBox[String](200,50, Pos.Center, courseItems)
+
     stage.scene = SceneHandler.createInitialScene(cbx).currentScene
 
     cbx.setOnAction((e:ActionEvent)=>{
       val dir = directoryList.find( x => x.toString.contains(cbx.getSelectionModel.getSelectedItem) ).get.toString
-
       stage.scene = SceneHandler.addQuestionsList(QABuilder.buildQuestionaire(dir).listQuestions.toList)
                                     .addAnswersList(QABuilder.buildAnswerList(dir).listAnswers.toList)
                                         .Next().currentScene;
