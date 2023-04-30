@@ -12,7 +12,10 @@ import scala.collection.mutable.ListBuffer
 object ActionEventListener {
 
   def getSectionChoiceIndex(choiceBox: ChoiceBox[String] ): Int = {
-    listSectionQuestion(choiceBox.getSelectionModel.getSelectedIndex).number -1
+    val index = listSectionQuestion(choiceBox.getSelectionModel.getSelectedIndex).number -1
+    selectedAnswers = ListBuffer()
+    0 to (index-1) foreach((i)=>{ selectedAnswers.addOne(null)})
+    index
   }
 
   def showResult(vBox1: VBox, sectionCbx: ChoiceBox[String], next: Button, bChart: BarChart[Number, String]): Unit ={
