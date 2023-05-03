@@ -100,9 +100,12 @@ object SceneHandler {
     submit.setOnAction((e)=>{
       ActionEventListener.submit(
         answerLabel,next,checkBoxList,toggleRadBtn
-      )})
+      )
+      submit.disable = true
+    })
 
     next.setOnAction((e)=>{
+      submit.disable = false
       if( showGraph && QABuilder.listQuestions(qIndex+1).text.take(2).equals("1.") ){
         val bChart = ViewBuilder.createBarChartResult(5,12, Properties.barStyle, Properties.barGraphTitle, (correctCount.toDouble/(qIndex+1 - cIndex)*100 ))
           ActionEventListener.showResult(vBox1, sectionCbx, next, bChart)
