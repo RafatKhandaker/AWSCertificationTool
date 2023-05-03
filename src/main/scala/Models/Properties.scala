@@ -14,11 +14,13 @@ object Properties {
   val nextTxt: String = "Next"
 
   val selectTwo: String = "select two."
+  val selectThree: String = "select three."
 
   val incorrectStyle: String = "-fx-font-weight: bold; -fx-text-fill: red"
   val correctStyle: String = "-fx-font-weight: bold; -fx-text-fill: green"
 
   val selectOnlyTwoTxt: String = "!!! Select only 2 values !!!"
+  val selectOnlyThreeTxt: String = "!!! Select only 3 values !!!"
 
   val barGraphTitle: String = "Total Score Percentage"
 }

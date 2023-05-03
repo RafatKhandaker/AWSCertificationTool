@@ -23,11 +23,16 @@ object ActionEventListener {
   }
 
   def submit(answerLabel: Label, next: Button, checkBoxList: ListBuffer[CheckBox], toggleRadBtn: ToggleGroup): Unit ={
-    if(listQuestions(qIndex).text.toLowerCase().contains(Properties.selectTwo) || listAnswers(qIndex).choice.length.equals(2)){
+    if(listAnswers(qIndex).choice.length > 1){
       val filteredCBL = checkBoxList.filter(cbx => cbx.isSelected)
-      if(filteredCBL.length != 2){
+      if(listQuestions(qIndex).text.toLowerCase().contains(Properties.selectTwo) && filteredCBL.length != 2){
         answerLabel.setStyle(Properties.incorrectStyle)
         answerLabel.setText(Properties.selectOnlyTwoTxt)
+        answerLabel.setVisible(true)
+        return
+      }else if(listQuestions(qIndex).text.toLowerCase().contains(Properties.selectThree) && filteredCBL.length != 3){
+        answerLabel.setStyle(Properties.incorrectStyle)
+        answerLabel.setText(Properties.selectOnlyThreeTxt)
         answerLabel.setVisible(true)
         return
       }
@@ -39,22 +44,17 @@ object ActionEventListener {
       })
       selectedAnswers.addOne( Answer( c, cText) )
 
-      var checkAns = true
-      0 to filteredCBL.length foreach{ i => {
-        if(!selectedAnswers(qIndex).choice.equals( listAnswers(qIndex).choice )) {
-          answerLabel.setStyle(Properties.incorrectStyle)
-          answerLabel.setText(s"Incorrect! Answer ${listAnswers(qIndex).choice(0)+","+listAnswers(qIndex).choice(1)}: ${listAnswers(qIndex).text}")
-          checkAns = false
-        }
-      }}
-      if(checkAns){
+      if(!selectedAnswers(qIndex).choice.equals( listAnswers(qIndex).choice )) {
+        answerLabel.setStyle(Properties.incorrectStyle)
+        answerLabel.setText(s"Incorrect! Answer ${listAnswers(qIndex).choice(0)+","+listAnswers(qIndex).choice(1)}: ${listAnswers(qIndex).text}")
+      }else{
         answerLabel.setStyle(Properties.correctStyle)
         answerLabel.setText(s"Correct! Answer ${listAnswers(qIndex).choice(0)+","+listAnswers(qIndex).choice(1)}: ${listAnswers(qIndex).text}")
         correctCount += 1
       }
     }
 
-    else if(!listQuestions(qIndex).text.toLowerCase().contains(Properties.selectTwo) && !listAnswers(qIndex).choice.length.equals(2)){
+    else{
       val c = toggleRadBtn.getSelectedToggle.asInstanceOf[javafx.scene.control.RadioButton].getText
       selectedAnswers.addOne( Answer(c(0).toString, c) )
 
@@ -74,7 +74,7 @@ object ActionEventListener {
 
   def next(qIndex: Int, sectionCbx: ChoiceBox[String], label: Label, answerLabel: Label, next: Button, submit: Button, vBox1: VBox, footerVBox: VBox, checkBoxList:ListBuffer[CheckBox], radioBtnList: ListBuffer[RadioButton] ): Unit={
     label.setText(listQuestions(qIndex).text)
-    if(listQuestions(qIndex).text.toLowerCase().contains(Properties.selectTwo) || listAnswers(qIndex).choice.length.equals(2) ){
+    if(listAnswers(qIndex).choice.length > 1 ){
       0 to 3 foreach{ i => {
         checkBoxList(i).setText(listQuestions(qIndex).options(i).text)
         checkBoxList(i).setSelected(false)
@@ -90,7 +90,7 @@ object ActionEventListener {
 
     answerLabel.setVisible(false)
     next.setVisible(false)
-    if(listQuestions(qIndex).text.toLowerCase().contains(Properties.selectTwo) || listAnswers(qIndex).choice.length.equals(2)){
+    if(listAnswers(qIndex).choice.length > 1){
       vBox1.children = Seq(
         sectionCbx,
         label,
