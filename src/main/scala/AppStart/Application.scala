@@ -35,7 +35,7 @@ object Application extends JFXApp3{
     cbx.setOnAction((e:ActionEvent)=>{
       stage.scene = SceneHandler.build(
         directoryList.find( x => x.toString.contains(cbx.getSelectionModel.getSelectedItem) ).get.toString
-      ).Next().currentScene
+      ).ChangeScene().currentScene
     })
 
   }

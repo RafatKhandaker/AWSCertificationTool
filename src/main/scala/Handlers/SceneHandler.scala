@@ -39,7 +39,7 @@ object SceneHandler {
     this
   }
 
-  def Next(): SceneHandler.type= {
+  def ChangeScene(): SceneHandler.type= {
     val toggleRadBtn = new ToggleGroup()
 
     val label = ViewBuilder.createLabel(
@@ -52,38 +52,23 @@ object SceneHandler {
     val submit = ViewBuilder.createButton(Properties.submitTxt, Pos.BottomCenter )
     val next = ViewBuilder.createButton(Properties.nextTxt, Pos.BottomCenter, false)
 
-    val checkBoxList: ListBuffer[CheckBox] = ListBuffer(
-      ViewBuilder.createCheckBox(QABuilder.listQuestions(qIndex).options(0).text, 800, 200),
-      ViewBuilder.createCheckBox(QABuilder.listQuestions(qIndex).options(1).text, 800, 200),
-      ViewBuilder.createCheckBox(QABuilder.listQuestions(qIndex).options(2).text, 800, 200),
-      ViewBuilder.createCheckBox(QABuilder.listQuestions(qIndex).options(3).text, 800, 200)
-    )
+     val checkBoxList: ListBuffer[CheckBox] = ListBuffer()
+     val radioBtnList: ListBuffer[RadioButton] = ListBuffer()
 
-    val radioBtnList: ListBuffer[RadioButton] = ListBuffer(
-      ViewBuilder.createRadioButton(QABuilder.listQuestions(qIndex).options(0).text, 800, 200, toggleRadBtn),
-      ViewBuilder.createRadioButton(QABuilder.listQuestions(qIndex).options(1).text, 800, 200, toggleRadBtn),
-      ViewBuilder.createRadioButton(QABuilder.listQuestions(qIndex).options(2).text, 800, 200, toggleRadBtn),
-      ViewBuilder.createRadioButton(QABuilder.listQuestions(qIndex).options(3).text, 800, 200, toggleRadBtn)
-    )
+    QABuilder.listQuestions(qIndex).options.foreach(o=>{
+      checkBoxList.addOne(ViewBuilder.createCheckBox(o.text, 800, 200))
+      radioBtnList.addOne(ViewBuilder.createRadioButton(o.text, 800, 200, toggleRadBtn))
+    })
+    checkBoxList.addOne(ViewBuilder.createCheckBox("", 800, 200))
+    radioBtnList.addOne(ViewBuilder.createRadioButton("", 800, 200, toggleRadBtn))
 
     val footerVBox = ViewBuilder.createVBox(
       10, 20, Pos.BottomRight,
       Seq(designerLabel)
     )
-    val vBox1 = ViewBuilder.createVBox(
-      10, 20, Pos.Center,
-      Seq(
-        sectionCbx,
-        label,
-        radioBtnList(0),
-        radioBtnList(1),
-        radioBtnList(2),
-        radioBtnList(3),
-        submit,
-        answerLabel,
-        next,
-        footerVBox
-      ))
+
+    val childrenSeq: Seq[Region] = ViewBuilder.buildChildrenSequence(qIndex,sectionCbx,label,checkBoxList,radioBtnList,submit,answerLabel,next, footerVBox )
+    val vBox1 = ViewBuilder.createVBox(10, 20, Pos.Center,childrenSeq)
 
     currentScene = new Scene(800,600)
 
@@ -95,6 +80,7 @@ object SceneHandler {
       ActionEventListener.next(
         qIndex, sectionCbx, label, answerLabel, next, submit, vBox1, footerVBox, checkBoxList, radioBtnList
       )
+      submit.disable = false
     })
 
     submit.setOnAction((e)=>{

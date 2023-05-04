@@ -1,6 +1,7 @@
 package Events
 
 import Builder.QABuilder.{listAnswers, listQuestions, listSectionQuestion}
+import Builder.ViewBuilder
 import Handlers.SceneHandler.{correctCount, currentScene, qIndex, selectedAnswers}
 import Models.{Answer, Properties}
 import scalafx.scene.chart.BarChart
@@ -25,17 +26,6 @@ object ActionEventListener {
   def submit(answerLabel: Label, next: Button, checkBoxList: ListBuffer[CheckBox], toggleRadBtn: ToggleGroup): Unit ={
     if(listAnswers(qIndex).choice.length > 1){
       val filteredCBL = checkBoxList.filter(cbx => cbx.isSelected)
-      if(listQuestions(qIndex).text.toLowerCase().contains(Properties.selectTwo) && filteredCBL.length != 2){
-        answerLabel.setStyle(Properties.incorrectStyle)
-        answerLabel.setText(Properties.selectOnlyTwoTxt)
-        answerLabel.setVisible(true)
-        return
-      }else if(listQuestions(qIndex).text.toLowerCase().contains(Properties.selectThree) && filteredCBL.length != 3){
-        answerLabel.setStyle(Properties.incorrectStyle)
-        answerLabel.setText(Properties.selectOnlyThreeTxt)
-        answerLabel.setVisible(true)
-        return
-      }
       var c = ""
       var cText = ""
       filteredCBL.foreach(cb =>{
@@ -46,10 +36,10 @@ object ActionEventListener {
 
       if(!selectedAnswers(qIndex).choice.equals( listAnswers(qIndex).choice )) {
         answerLabel.setStyle(Properties.incorrectStyle)
-        answerLabel.setText(s"Incorrect! Answer ${listAnswers(qIndex).choice(0)+","+listAnswers(qIndex).choice(1)}: ${listAnswers(qIndex).text}")
+        answerLabel.setText(s"Incorrect! Answer ${listAnswers(qIndex).choice}: ${listAnswers(qIndex).text}")
       }else{
         answerLabel.setStyle(Properties.correctStyle)
-        answerLabel.setText(s"Correct! Answer ${listAnswers(qIndex).choice(0)+","+listAnswers(qIndex).choice(1)}: ${listAnswers(qIndex).text}")
+        answerLabel.setText(s"Correct! Answer ${listAnswers(qIndex).choice}: ${listAnswers(qIndex).text}")
         correctCount += 1
       }
     }
@@ -74,49 +64,23 @@ object ActionEventListener {
 
   def next(qIndex: Int, sectionCbx: ChoiceBox[String], label: Label, answerLabel: Label, next: Button, submit: Button, vBox1: VBox, footerVBox: VBox, checkBoxList:ListBuffer[CheckBox], radioBtnList: ListBuffer[RadioButton] ): Unit={
     label.setText(listQuestions(qIndex).text)
-    if(listAnswers(qIndex).choice.length > 1 ){
-      0 to 3 foreach{ i => {
-        checkBoxList(i).setText(listQuestions(qIndex).options(i).text)
-        checkBoxList(i).setSelected(false)
-      }}
-    }
-    else{
-      0 to 3 foreach{ i => {
-        radioBtnList(i).setText(listQuestions(qIndex).options(i).text)
-        radioBtnList(i).setSelected(false)
-      }}
-    }
+    checkBoxList.foreach(cbl=> cbl.setSelected(false))
+    radioBtnList.foreach(rbl=> rbl.setSelected(false))
 
+    if(listAnswers(qIndex).choice.length > 1 ){
+      listQuestions(qIndex).options.zipWithIndex foreach{ case(o,i) => {
+        checkBoxList(i).setText(o.text)
+      }}}
+    else{
+      listQuestions(qIndex).options.zipWithIndex foreach{ case(o,i) => {
+        radioBtnList(i).setText(o.text)
+      }}}
 
     answerLabel.setVisible(false)
     next.setVisible(false)
-    if(listAnswers(qIndex).choice.length > 1){
-      vBox1.children = Seq(
-        sectionCbx,
-        label,
-        checkBoxList(0),
-        checkBoxList(1),
-        checkBoxList(2),
-        checkBoxList(3),
-        submit,
-        answerLabel,
-        next,
-        footerVBox
-      )
-    }else{
-      vBox1.children = Seq(
-        sectionCbx,
-        label,
-        radioBtnList(0),
-        radioBtnList(1),
-        radioBtnList(2),
-        radioBtnList(3),
-        submit,
-        answerLabel,
-        next,
-        footerVBox
-      )
-    }
+    vBox1.children = ViewBuilder.buildChildrenSequence(
+      qIndex,sectionCbx,label,checkBoxList,radioBtnList,submit,answerLabel,next, footerVBox
+    )
     currentScene.setRoot(vBox1)
   }
 

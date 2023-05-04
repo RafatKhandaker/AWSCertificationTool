@@ -8,7 +8,7 @@ import scala.collection.mutable.ListBuffer
 
 object QABuilder {
   var p1 = "\\d+\\. ([A-Za-z&-._\\n*$\\/(A-Za-z0-9)“”,’—]+( [A-Za-z&-._\\n$“”,’\\/(A-Za-z0-9)—]*)+)\\?* (\\n*\\S* *\\n*\\S*)\\n".r
-  var p2 = "[A-D]{1}\\. ([A-Za-z&-._\\/\\n$(A-Za-z0-9)*“”,’—;:]+( [A-Za-z&-._“”,’\\/\\n$(A-Za-z0-9)—;:]*)+)\\n*".r
+  var p2 = "[A-E]{1}\\. ([A-Za-z&-._\\/\\n$(A-Za-z0-9)*“”,’—;:]+( [A-Za-z&-._“”,’\\/\\n$(A-Za-z0-9)—;:]*)+)\\n*".r
 
   var listQuestions: ListBuffer[Question] = new ListBuffer()
   var listOptions: ListBuffer[Options] = new ListBuffer()
@@ -31,16 +31,23 @@ object QABuilder {
       }
 
       for( pMatch <- p2.findAllMatchIn(sFile)) {
-        pMatch.toString().split("\\n\\n").foreach(s=>{
-          if(s.contains("A.")) listOptions.addOne(Options('A', s))
-          else if(s.contains("B.")) listOptions.addOne(Options('B', s))
-          else if(s.contains("C.")) listOptions.addOne(Options('C', s))
-          else if(s.contains("D.")){
-            listOptions.addOne(Options('D', s))
-            listQuestions.addOne( Question((qIndex+1),lquestions(qIndex),listOptions.toList))
-            listOptions = new ListBuffer()
-            qIndex += 1
-          }})}
+        val pMatchArray = pMatch.toString().split("\\n\\n").zipWithIndex
+        pMatchArray foreach{ case(s,i)=>{
+            if(s.contains("A.")) listOptions.addOne(Options('A', s))
+
+            else if(s.contains("B.")) listOptions.addOne(Options('B', s))
+
+            else if(s.contains("C.")) listOptions.addOne(Options('C', s))
+
+            else if(s.contains("D.")){
+              listOptions.addOne(Options('D', s))
+              if( (i+1) <= pMatchArray.length -1 && pMatchArray(i+1)._1.contains("E."))
+                listOptions.addOne(Options('E', pMatchArray(i+1)._1))
+              listQuestions.addOne( Question((qIndex+1),lquestions(qIndex),listOptions.toList))
+              listOptions = new ListBuffer()
+              qIndex += 1
+            }
+        }}}
     })
     this
   }
@@ -51,7 +58,7 @@ object QABuilder {
         val s1 = (("[A-Z,\\s]*\\. ").r.findFirstIn(a)).fold("")(_.toString)
         var s2 = ""
         ("[A-Z]").r.findAllMatchIn(s1).foreach(s => { s2 += s })
-        if(!s2.isEmpty) listAnswers.addOne(Answer(s2, a.substring(2)))
+        if(!s2.isEmpty) listAnswers.addOne(Answer(s2, a.substring(a.indexOf('.')+1 )))
       })})
     this
   }

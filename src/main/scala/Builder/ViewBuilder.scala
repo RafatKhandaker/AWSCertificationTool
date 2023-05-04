@@ -1,14 +1,16 @@
 package Builder
 
+import Builder.QABuilder.{listAnswers, listQuestions}
 import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.Node
 import scalafx.scene.chart.{BarChart, CategoryAxis, NumberAxis, XYChart}
 import scalafx.scene.control._
-import scalafx.scene.layout.VBox
+import scalafx.scene.layout.{Region, VBox}
 
 import scala.Double.NaN
+import scala.collection.mutable.ListBuffer
 
 object ViewBuilder {
 
@@ -110,5 +112,69 @@ object ViewBuilder {
       title = titleTxt+s" - ${score}%"
       data() ++= Seq(series, series2)
     }
+  }
+
+  def buildChildrenSequence(qIndex:Int, sectionCbx:ChoiceBox[String], label:Label, checkBoxList:ListBuffer[CheckBox], radioBtnList: ListBuffer[RadioButton], submit:Button, answerLabel:Label, next:Button, footerVBox:VBox): Seq[Region]={
+    var childrenSeq: Seq[Region] = null
+    if(listAnswers(qIndex).choice.length > 1){
+      if(listQuestions(qIndex).options.length == 5){
+        childrenSeq = Seq(
+          sectionCbx,
+          label,
+          checkBoxList(0),
+          checkBoxList(1),
+          checkBoxList(2),
+          checkBoxList(3),
+          checkBoxList(4),
+          submit,
+          answerLabel,
+          next,
+          footerVBox
+        )
+      }else{
+        childrenSeq = Seq(
+          sectionCbx,
+          label,
+          checkBoxList(0),
+          checkBoxList(1),
+          checkBoxList(2),
+          checkBoxList(3),
+          submit,
+          answerLabel,
+          next,
+          footerVBox
+        )
+      }
+    }else{
+      if(listQuestions(qIndex).options.length == 5){
+        childrenSeq = Seq(
+          sectionCbx,
+          label,
+          radioBtnList(0),
+          radioBtnList(1),
+          radioBtnList(2),
+          radioBtnList(3),
+          radioBtnList(4),
+          submit,
+          answerLabel,
+          next,
+          footerVBox
+        )
+      }else{
+        childrenSeq = Seq(
+          sectionCbx,
+          label,
+          radioBtnList(0),
+          radioBtnList(1),
+          radioBtnList(2),
+          radioBtnList(3),
+          submit,
+          answerLabel,
+          next,
+          footerVBox
+        )
+      }
+    }
+    childrenSeq
   }
 }
