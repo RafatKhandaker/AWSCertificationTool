@@ -52,15 +52,11 @@ object SceneHandler {
     val submit = ViewBuilder.createButton(Properties.submitTxt, Pos.BottomCenter )
     val next = ViewBuilder.createButton(Properties.nextTxt, Pos.BottomCenter, false)
 
-     val checkBoxList: ListBuffer[CheckBox] = ListBuffer()
-     val radioBtnList: ListBuffer[RadioButton] = ListBuffer()
+    val checkBoxList: ListBuffer[CheckBox] = ListBuffer()
+    val radioBtnList: ListBuffer[RadioButton] = ListBuffer()
 
-    QABuilder.listQuestions(qIndex).options.foreach(o=>{
-      checkBoxList.addOne(ViewBuilder.createCheckBox(o.text, 800, 200))
-      radioBtnList.addOne(ViewBuilder.createRadioButton(o.text, 800, 200, toggleRadBtn))
-    })
-    checkBoxList.addOne(ViewBuilder.createCheckBox("", 800, 200))
-    radioBtnList.addOne(ViewBuilder.createRadioButton("", 800, 200, toggleRadBtn))
+    ViewBuilder.createCheckBoxList(checkBoxList,qIndex)
+    ViewBuilder.createRadioBoxList(radioBtnList,qIndex, toggleRadBtn)
 
     val footerVBox = ViewBuilder.createVBox(
       10, 20, Pos.BottomRight,
@@ -78,7 +74,7 @@ object SceneHandler {
       qIndex = ActionEventListener.getSectionChoiceIndex(sectionCbx)
       cIndex = qIndex
       ActionEventListener.next(
-        qIndex, sectionCbx, label, answerLabel, next, submit, vBox1, footerVBox, checkBoxList, radioBtnList
+        toggleRadBtn, qIndex, sectionCbx, label, answerLabel, next, submit, vBox1, footerVBox, checkBoxList, radioBtnList
       )
       submit.disable = false
     })
@@ -102,7 +98,7 @@ object SceneHandler {
       else{
         qIndex += 1
         ActionEventListener.next(
-          qIndex, sectionCbx, label, answerLabel, next, submit, vBox1, footerVBox, checkBoxList, radioBtnList
+          toggleRadBtn, qIndex, sectionCbx, label, answerLabel, next, submit, vBox1, footerVBox, checkBoxList, radioBtnList
         )
         if(!showGraph) showGraph = true
       }

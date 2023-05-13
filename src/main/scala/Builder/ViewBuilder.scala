@@ -1,6 +1,6 @@
 package Builder
 
-import Builder.QABuilder.{listAnswers, listQuestions}
+import Builder.QABuilder.listAnswers
 import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.{Insets, Pos}
@@ -10,6 +10,7 @@ import scalafx.scene.control._
 import scalafx.scene.layout.{Region, VBox}
 
 import scala.Double.NaN
+import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
 object ViewBuilder {
@@ -82,6 +83,18 @@ object ViewBuilder {
     }
   }
 
+  def createCheckBoxList(refObject: ListBuffer[CheckBox], qIndex:Int, toggleRadBtn:ToggleGroup = null): Unit = {
+    QABuilder.listQuestions(qIndex).options.foreach(o=> {
+      refObject.addOne(this.createCheckBox(o.text, 800, 200))
+    })
+  }
+
+  def createRadioBoxList(refObject: ListBuffer[RadioButton], qIndex:Int, toggleRadBtn:ToggleGroup = null): Unit = {
+    QABuilder.listQuestions(qIndex).options.foreach(o=> {
+      refObject.addOne(this.createRadioButton(o.text, 800, 200, toggleRadBtn))
+    })
+  }
+
   def createBarChartResult(bGap: Double, cGap: Double, style: String, titleTxt: String, score: Double): BarChart[Number, String]={
     val label = s"${score} %"
 
@@ -116,65 +129,17 @@ object ViewBuilder {
 
   def buildChildrenSequence(qIndex:Int, sectionCbx:ChoiceBox[String], label:Label, checkBoxList:ListBuffer[CheckBox], radioBtnList: ListBuffer[RadioButton], submit:Button, answerLabel:Label, next:Button, footerVBox:VBox): Seq[Region]={
     var childrenSeq: Seq[Region] = null
-    if(listAnswers(qIndex).choice.length > 1){
-      if(listQuestions(qIndex).options.length == 5){
-        childrenSeq = Seq(
-          sectionCbx,
-          label,
-          checkBoxList(0),
-          checkBoxList(1),
-          checkBoxList(2),
-          checkBoxList(3),
-          checkBoxList(4),
-          submit,
-          answerLabel,
-          next,
-          footerVBox
-        )
-      }else{
-        childrenSeq = Seq(
-          sectionCbx,
-          label,
-          checkBoxList(0),
-          checkBoxList(1),
-          checkBoxList(2),
-          checkBoxList(3),
-          submit,
-          answerLabel,
-          next,
-          footerVBox
-        )
-      }
-    }else{
-      if(listQuestions(qIndex).options.length == 5){
-        childrenSeq = Seq(
-          sectionCbx,
-          label,
-          radioBtnList(0),
-          radioBtnList(1),
-          radioBtnList(2),
-          radioBtnList(3),
-          radioBtnList(4),
-          submit,
-          answerLabel,
-          next,
-          footerVBox
-        )
-      }else{
-        childrenSeq = Seq(
-          sectionCbx,
-          label,
-          radioBtnList(0),
-          radioBtnList(1),
-          radioBtnList(2),
-          radioBtnList(3),
-          submit,
-          answerLabel,
-          next,
-          footerVBox
-        )
-      }
-    }
+    val buffer: mutable.Buffer[Region] = mutable.Buffer()
+    buffer.addOne(sectionCbx)
+    buffer.addOne(label)
+    if(listAnswers(qIndex).choice.length > 1) checkBoxList.foreach(c=>{ buffer.addOne(c)})
+    else radioBtnList.foreach(r=>{ buffer.addOne(r)})
+    buffer.addOne(submit)
+    buffer.addOne(answerLabel)
+    buffer.addOne(next)
+    buffer.addOne(footerVBox)
+    childrenSeq = buffer.toSeq
+
     childrenSeq
   }
 }

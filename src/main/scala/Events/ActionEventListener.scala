@@ -54,7 +54,7 @@ object ActionEventListener {
         correctCount += 1
       }else{
         answerLabel.setStyle(Properties.incorrectStyle)
-        answerLabel.setText(s"Inorrect! Answer ${listAnswers(qIndex).choice}: ${listAnswers(qIndex).text}" )
+        answerLabel.setText(s"Incorrect! Answer ${listAnswers(qIndex).choice}: ${listAnswers(qIndex).text}" )
       }
     }
 
@@ -62,10 +62,13 @@ object ActionEventListener {
     next.setVisible(true)
   }
 
-  def next(qIndex: Int, sectionCbx: ChoiceBox[String], label: Label, answerLabel: Label, next: Button, submit: Button, vBox1: VBox, footerVBox: VBox, checkBoxList:ListBuffer[CheckBox], radioBtnList: ListBuffer[RadioButton] ): Unit={
+  def next(toggleRadBtn: ToggleGroup, qIndex: Int, sectionCbx: ChoiceBox[String], label: Label, answerLabel: Label, next: Button, submit: Button, vBox1: VBox, footerVBox: VBox, checkBoxList:ListBuffer[CheckBox], radioBtnList: ListBuffer[RadioButton] ): Unit={
     label.setText(listQuestions(qIndex).text)
-    checkBoxList.foreach(cbl=> cbl.setSelected(false))
-    radioBtnList.foreach(rbl=> rbl.setSelected(false))
+    checkBoxList.clear()
+    radioBtnList.clear()
+
+    ViewBuilder.createCheckBoxList(checkBoxList,qIndex)
+    ViewBuilder.createRadioBoxList(radioBtnList,qIndex, toggleRadBtn)
 
     if(listAnswers(qIndex).choice.length > 1 ){
       listQuestions(qIndex).options.zipWithIndex foreach{ case(o,i) => {

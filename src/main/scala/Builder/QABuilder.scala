@@ -8,7 +8,7 @@ import scala.collection.mutable.ListBuffer
 
 object QABuilder {
   var p1 = "\\d+\\. ([A-Za-z&-._\\n*$\\/(A-Za-z0-9)“”,’—]+( [A-Za-z&-._\\n$“”,’\\/(A-Za-z0-9)—]*)+)\\?* (\\n*\\S* *\\n*\\S*)\\n".r
-  var p2 = "[A-E]{1}\\. ([A-Za-z&-._\\/\\n$(A-Za-z0-9)*“”,’—;:]+( [A-Za-z&-._“”,’\\/\\n$(A-Za-z0-9)—;:]*)+)\\n*".r
+  var p2 = "[A-F]{1}\\. ([A-Za-z&-._\\/\\n$(A-Za-z0-9)*“”,’—;:]+( [A-Za-z&-._“”,’\\/\\n$(A-Za-z0-9)—;:]*)+)\\n*".r
 
   var listQuestions: ListBuffer[Question] = new ListBuffer()
   var listOptions: ListBuffer[Options] = new ListBuffer()
@@ -41,9 +41,14 @@ object QABuilder {
 
             else if(s.contains("D.")){
               listOptions.addOne(Options('D', s))
+
               if( (i+1) <= pMatchArray.length -1 && pMatchArray(i+1)._1.contains("E."))
                 listOptions.addOne(Options('E', pMatchArray(i+1)._1))
+              if( (i+2) <= pMatchArray.length -1 && pMatchArray(i+2)._1.contains("F."))
+                listOptions.addOne(Options('F', pMatchArray(i+2)._1))
+
               listQuestions.addOne( Question((qIndex+1),lquestions(qIndex),listOptions.toList))
+
               listOptions = new ListBuffer()
               qIndex += 1
             }
