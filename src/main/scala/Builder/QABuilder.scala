@@ -32,7 +32,8 @@ object QABuilder {
 
       for( pMatch <- p2.findAllMatchIn(sFile)) {
         val pMatchArray = pMatch.toString().split("\\n\\n").zipWithIndex
-        pMatchArray foreach{ case(s,i)=>{
+        pMatchArray foreach{
+          case(s,i)=>{
             if(s.contains("A.")) listOptions.addOne(Options('A', s))
 
             else if(s.contains("B.")) listOptions.addOne(Options('B', s))
